@@ -8,8 +8,7 @@ import { path } from '../internal/utils/path';
 export class MemoryResource extends APIResource {
   /**
    * Creates a new memory with the provided text content. The content is encrypted
-   * and queued for embedding. If a dedupKey is provided and matches an existing
-   * memory, returns the existing memory instead of creating a duplicate.
+   * and queued for embedding.
    *
    * @example
    * ```ts
@@ -111,41 +110,27 @@ export interface Memory {
   /**
    * Optional metadata associated with the memory
    */
-  metadata: Memory.Metadata | null;
-}
-
-export namespace Memory {
-  /**
-   * Optional metadata associated with the memory
-   */
-  export interface Metadata {
-    /**
-     * Deduplication key if provided during creation
-     */
-    dedupKey?: string;
-
-    [k: string]: unknown;
-  }
+  metadata: { [key: string]: unknown } | null;
 }
 
 /**
- * Response when memory is deduplicated using dedupKey
+ * Response when a new memory is successfully created
  */
 export interface MemoryCreateResponse {
   /**
-   * Indicates this was a duplicate
+   * ISO 8601 timestamp of memory creation
    */
-  duplicated: true;
+  createdAt: string;
 
   /**
-   * UUID of the existing memory that matched the dedupKey
+   * Embedding status (always 'processing' for new memories)
+   */
+  embedding: 'processing';
+
+  /**
+   * UUID of the newly created memory
    */
   memoryId: string;
-
-  /**
-   * Explanation that memory already exists
-   */
-  message: string;
 
   /**
    * Response status indicator
@@ -265,12 +250,6 @@ export interface MemoryCreateParams {
    * The text content to store as a memory
    */
   text: string;
-
-  /**
-   * Optional deduplication key - if provided and matches an existing memory, returns
-   * the existing memory instead of creating a new one
-   */
-  dedupKey?: string | null;
 }
 
 export interface MemoryListParams {

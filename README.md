@@ -31,7 +31,7 @@ const client = new Azen({
 
 const memory = await client.memory.create({ text: 'I love hiking in the mountains' });
 
-console.log(memory.duplicated);
+console.log(memory.createdAt);
 ```
 
 ### Request & Response types
@@ -152,7 +152,7 @@ const { data: memory, response: raw } = await client.memory
   .create({ text: 'I love hiking in the mountains' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(memory.duplicated);
+console.log(memory.createdAt);
 ```
 
 ### Logging
