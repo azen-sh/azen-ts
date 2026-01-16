@@ -7,14 +7,14 @@ import { path } from '../internal/utils/path';
 
 export class MemoryResource extends APIResource {
   /**
-   * Stores a memory for the authenticated user and queues it for embedding. If a
-   * `dedupKey` is provided and matches an existing memory, the existing one is
-   * returned instead.
+   * Creates a new memory with the provided text content. The content is encrypted
+   * and queued for embedding. If a dedupKey is provided and matches an existing
+   * memory, returns the existing memory instead of creating a duplicate.
    *
    * @example
    * ```ts
    * const memory = await client.memory.create({
-   *   text: 'User likes cold brew coffee',
+   *   text: 'I love hiking in the mountains',
    * });
    * ```
    */
@@ -23,12 +23,13 @@ export class MemoryResource extends APIResource {
   }
 
   /**
-   * Retrieve a memory by ID
+   * Fetches a specific memory using its unique UUID. Returns 404 if the memory
+   * doesn't exist or doesn't belong to the authenticated user.
    *
    * @example
    * ```ts
    * const memory = await client.memory.retrieve(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   '550e8400-e29b-41d4-a716-446655440000',
    * );
    * ```
    */
@@ -37,7 +38,8 @@ export class MemoryResource extends APIResource {
   }
 
   /**
-   * List user memories
+   * Retrieves a paginated list of all memories for the authenticated user, ordered
+   * by creation date (newest first). Supports pagination via query parameters.
    *
    * @example
    * ```ts
@@ -52,13 +54,13 @@ export class MemoryResource extends APIResource {
   }
 
   /**
-   * Deletes the memory record and its vector embedding. Returns deleted=false if
-   * memory does not exist (idempotent behavior).
+   * Permanently deletes a memory and its associated vector embeddings. Returns 404
+   * if the memory doesn't exist.
    *
    * @example
    * ```ts
    * const memory = await client.memory.delete(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   '550e8400-e29b-41d4-a716-446655440000',
    * );
    * ```
    */
@@ -67,12 +69,13 @@ export class MemoryResource extends APIResource {
   }
 
   /**
-   * Performs semantic search on user memories using vector embeddings.
+   * Performs semantic vector search across all user memories using the provided
+   * query text. Returns the most similar memories ranked by similarity score.
    *
    * @example
    * ```ts
    * const response = await client.memory.search({
-   *   query: 'What drinks does the user like?',
+   *   query: 'outdoor activities',
    * });
    * ```
    */
@@ -81,87 +84,216 @@ export class MemoryResource extends APIResource {
   }
 }
 
+/**
+ * A memory object containing encrypted user data with metadata
+ */
 export interface Memory {
+  /**
+   * Unique identifier for the memory
+   */
   id: string;
 
+  /**
+   * The decrypted text content of the memory
+   */
   content: string;
 
+  /**
+   * ISO 8601 timestamp when the memory was created
+   */
   createdAt: string;
 
+  /**
+   * Indicates whether the memory has been successfully embedded for vector search
+   */
   embedded: boolean;
 
-  metadata?: unknown | null;
+  /**
+   * Optional metadata associated with the memory
+   */
+  metadata: Memory.Metadata | null;
 }
 
-export interface MemoryCreateResponse {
-  duplicated: boolean;
+export namespace Memory {
+  /**
+   * Optional metadata associated with the memory
+   */
+  export interface Metadata {
+    /**
+     * Deduplication key if provided during creation
+     */
+    dedupKey?: string;
 
+    [k: string]: unknown;
+  }
+}
+
+/**
+ * Response when memory is deduplicated using dedupKey
+ */
+export interface MemoryCreateResponse {
+  /**
+   * Indicates this was a duplicate
+   */
+  duplicated: true;
+
+  /**
+   * UUID of the existing memory that matched the dedupKey
+   */
   memoryId: string;
 
+  /**
+   * Explanation that memory already exists
+   */
   message: string;
 
-  status: string;
+  /**
+   * Response status indicator
+   */
+  status: 'success';
 }
 
+/**
+ * Response when retrieving a specific memory
+ */
 export interface MemoryRetrieveResponse {
-  memory: Memory | null;
+  /**
+   * The memory object
+   */
+  memory: Memory;
 
-  status: string;
-
-  message?: string;
+  /**
+   * Response status indicator
+   */
+  status: 'success';
 }
 
+/**
+ * Paginated list of user memories
+ */
 export interface MemoryListResponse {
+  /**
+   * Array of memory objects for the current page
+   */
   memories: Array<Memory>;
 
+  /**
+   * Current page number
+   */
   page: number;
 
+  /**
+   * Number of memories per page
+   */
   per: number;
 
-  status: string;
+  /**
+   * Response status indicator
+   */
+  status: 'success';
 }
 
+/**
+ * Response when memory is successfully deleted
+ */
 export interface MemoryDeleteResponse {
-  deleted: boolean;
+  /**
+   * Indicates successful deletion
+   */
+  deleted: true;
 
+  /**
+   * UUID of the deleted memory
+   */
   memoryId: string;
 
+  /**
+   * Confirmation message
+   */
   message: string;
 
-  status: string;
+  /**
+   * Response status indicator
+   */
+  status: 'success';
 }
 
+/**
+ * Search results with matched memories and similarity scores
+ */
 export interface MemorySearchResponse {
+  /**
+   * Array of matching memory objects ordered by relevance
+   */
   memories: Array<Memory>;
 
+  /**
+   * Raw similarity scores and IDs from vector search
+   */
   rawMatches: Array<MemorySearchResponse.RawMatch>;
 
-  status: string;
+  /**
+   * Response status indicator
+   */
+  status: 'success';
 }
 
 export namespace MemorySearchResponse {
+  /**
+   * A search result match with similarity score from vector search
+   */
   export interface RawMatch {
+    /**
+     * Memory identifier (may include chunk identifier separated by ::)
+     */
     id: string;
 
+    /**
+     * Similarity score between query and memory (higher is better)
+     */
     score: number;
+
+    /**
+     * Vector values (typically empty array in responses)
+     */
+    values: Array<number>;
   }
 }
 
 export interface MemoryCreateParams {
+  /**
+   * The text content to store as a memory
+   */
   text: string;
 
+  /**
+   * Optional deduplication key - if provided and matches an existing memory, returns
+   * the existing memory instead of creating a new one
+   */
   dedupKey?: string | null;
 }
 
 export interface MemoryListParams {
+  /**
+   * Page number for pagination (starts at 1)
+   */
   page?: number;
 
+  /**
+   * Number of memories per page (max 100)
+   */
   per?: number;
 }
 
 export interface MemorySearchParams {
+  /**
+   * The search query text to find similar memories
+   */
   query: string;
 
+  /**
+   * Maximum number of top results to return
+   */
   topK?: number;
 }
 
