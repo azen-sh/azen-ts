@@ -22,10 +22,7 @@ describe('resource memory', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.memory.create({
-      text: 'I love hiking in the mountains',
-      dedupKey: 'my-unique-key',
-    });
+    const response = await client.memory.create({ text: 'I love hiking in the mountains' });
   });
 
   // Prism tests are disabled
