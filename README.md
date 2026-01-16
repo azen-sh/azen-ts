@@ -29,7 +29,7 @@ const client = new Azen({
   apiKey: process.env['AZEN_API_KEY'], // This is the default and can be omitted
 });
 
-const memory = await client.memory.create({ text: 'User likes cold brew coffee' });
+const memory = await client.memory.create({ text: 'I love hiking in the mountains' });
 
 console.log(memory.duplicated);
 ```
@@ -46,7 +46,7 @@ const client = new Azen({
   apiKey: process.env['AZEN_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Azen.MemoryCreateParams = { text: 'User likes cold brew coffee' };
+const params: Azen.MemoryCreateParams = { text: 'I love hiking in the mountains' };
 const memory: Azen.MemoryCreateResponse = await client.memory.create(params);
 ```
 
@@ -61,7 +61,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const memory = await client.memory
-  .create({ text: 'User likes cold brew coffee' })
+  .create({ text: 'I love hiking in the mountains' })
   .catch(async (err) => {
     if (err instanceof Azen.APIError) {
       console.log(err.status); // 400
@@ -102,7 +102,7 @@ const client = new Azen({
 });
 
 // Or, configure per-request:
-await client.memory.create({ text: 'User likes cold brew coffee' }, {
+await client.memory.create({ text: 'I love hiking in the mountains' }, {
   maxRetries: 5,
 });
 ```
@@ -119,7 +119,7 @@ const client = new Azen({
 });
 
 // Override per-request:
-await client.memory.create({ text: 'User likes cold brew coffee' }, {
+await client.memory.create({ text: 'I love hiking in the mountains' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -142,12 +142,14 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Azen();
 
-const response = await client.memory.create({ text: 'User likes cold brew coffee' }).asResponse();
+const response = await client.memory
+  .create({ text: 'I love hiking in the mountains' })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: memory, response: raw } = await client.memory
-  .create({ text: 'User likes cold brew coffee' })
+  .create({ text: 'I love hiking in the mountains' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(memory.duplicated);
