@@ -2,7 +2,7 @@
   "name": "azen",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Azen API",
-  "author": "Azen <>",
+  "author": "Azen <govindvashishat@gmail.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
