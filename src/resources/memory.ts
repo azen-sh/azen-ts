@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { MemoryPagination, type MemoryPaginationParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -42,14 +43,17 @@ export class MemoryResource extends APIResource {
    *
    * @example
    * ```ts
-   * const memories = await client.memory.list();
+   * // Automatically fetches more pages as needed.
+   * for await (const memory of client.memory.list()) {
+   *   // ...
+   * }
    * ```
    */
   list(
     query: MemoryListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MemoryListResponse> {
-    return this._client.get('/memory', { query, ...options });
+  ): PagePromise<MemoriesMemoryPagination, Memory> {
+    return this._client.getAPIList('/memory', MemoryPagination<Memory>, { query, ...options });
   }
 
   /**
@@ -82,6 +86,8 @@ export class MemoryResource extends APIResource {
     return this._client.post('/memory/search', { body, ...options });
   }
 }
+
+export type MemoriesMemoryPagination = MemoryPagination<Memory>;
 
 /**
  * A memory object containing encrypted user data with metadata
@@ -151,41 +157,6 @@ export interface MemoryRetrieveResponse {
    * Response status indicator
    */
   status: 'success';
-}
-
-/**
- * Paginated list of user memories
- */
-export interface MemoryListResponse {
-  /**
-   * Array of memory objects for the current page
-   */
-  memories: Array<Memory>;
-
-  /**
-   * Current page number
-   */
-  page: number;
-
-  /**
-   * Number of memories per page
-   */
-  per: number;
-
-  /**
-   * Response status indicator
-   */
-  status: 'success';
-
-  /**
-   * Total count of memory objects
-   */
-  total_count: number;
-
-  /**
-   * Total number of pages available
-   */
-  total_pages: number;
 }
 
 /**
@@ -262,17 +233,7 @@ export interface MemoryCreateParams {
   text: string;
 }
 
-export interface MemoryListParams {
-  /**
-   * Page number for pagination (starts at 1)
-   */
-  page?: number;
-
-  /**
-   * Number of memories per page (max 100)
-   */
-  per?: number;
-}
+export interface MemoryListParams extends MemoryPaginationParams {}
 
 export interface MemorySearchParams {
   /**
@@ -291,9 +252,9 @@ export declare namespace MemoryResource {
     type Memory as Memory,
     type MemoryCreateResponse as MemoryCreateResponse,
     type MemoryRetrieveResponse as MemoryRetrieveResponse,
-    type MemoryListResponse as MemoryListResponse,
     type MemoryDeleteResponse as MemoryDeleteResponse,
     type MemorySearchResponse as MemorySearchResponse,
+    type MemoriesMemoryPagination as MemoriesMemoryPagination,
     type MemoryCreateParams as MemoryCreateParams,
     type MemoryListParams as MemoryListParams,
     type MemorySearchParams as MemorySearchParams,

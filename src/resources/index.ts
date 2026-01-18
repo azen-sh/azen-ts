@@ -5,10 +5,10 @@ export {
   type Memory,
   type MemoryCreateResponse,
   type MemoryRetrieveResponse,
-  type MemoryListResponse,
   type MemoryDeleteResponse,
   type MemorySearchResponse,
   type MemoryCreateParams,
   type MemoryListParams,
   type MemorySearchParams,
+  type MemoriesMemoryPagination,
 } from './memory';

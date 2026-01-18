@@ -13,16 +13,18 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type MemoryPaginationParams, MemoryPaginationResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  MemoriesMemoryPagination,
   Memory,
   MemoryCreateParams,
   MemoryCreateResponse,
   MemoryDeleteResponse,
   MemoryListParams,
-  MemoryListResponse,
   MemoryResource,
   MemoryRetrieveResponse,
   MemorySearchParams,
@@ -493,6 +495,25 @@ export class Azen {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Azen, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -733,14 +754,20 @@ Azen.MemoryResource = MemoryResource;
 export declare namespace Azen {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import MemoryPagination = Pagination.MemoryPagination;
+  export {
+    type MemoryPaginationParams as MemoryPaginationParams,
+    type MemoryPaginationResponse as MemoryPaginationResponse,
+  };
+
   export {
     MemoryResource as MemoryResource,
     type Memory as Memory,
     type MemoryCreateResponse as MemoryCreateResponse,
     type MemoryRetrieveResponse as MemoryRetrieveResponse,
-    type MemoryListResponse as MemoryListResponse,
     type MemoryDeleteResponse as MemoryDeleteResponse,
     type MemorySearchResponse as MemorySearchResponse,
+    type MemoriesMemoryPagination as MemoriesMemoryPagination,
     type MemoryCreateParams as MemoryCreateParams,
     type MemoryListParams as MemoryListParams,
     type MemorySearchParams as MemorySearchParams,
