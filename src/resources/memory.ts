@@ -176,6 +176,16 @@ export interface MemoryListResponse {
    * Response status indicator
    */
   status: 'success';
+
+  /**
+   * Total count of memory objects
+   */
+  total_count: number;
+
+  /**
+   * Total number of pages available
+   */
+  total_pages: number;
 }
 
 /**
