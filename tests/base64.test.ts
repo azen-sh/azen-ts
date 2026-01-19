@@ -1,4 +1,4 @@
-import { fromBase64, toBase64 } from 'azen/internal/utils/base64';
+import { fromBase64, toBase64 } from '@azen-sh/sdk/internal/utils/base64';
 
 describe.each(['Buffer', 'atob'])('with %s', (mode) => {
   let originalBuffer: BufferConstructor;

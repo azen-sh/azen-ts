@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Azen } from 'azen';
+import { Azen } from '@azen-sh/sdk';
 
 const { stringifyQuery } = Azen.prototype as any;
 

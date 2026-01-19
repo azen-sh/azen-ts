@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "azen/*": ["./src/*"],
-      "azen": ["./src/index.ts"]
+      "@azen-sh/sdk/*": ["./src/*"],
+      "@azen-sh/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 
