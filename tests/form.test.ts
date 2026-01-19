@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'azen/internal/uploads';
-import { toFile } from 'azen/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@azen-sh/sdk/internal/uploads';
+import { toFile } from '@azen-sh/sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

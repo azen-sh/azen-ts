@@ -55,12 +55,12 @@ $ cd azen-ts
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link azen
+$ yarn link @azen-sh/sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global azen
+$ pnpm link -—global @azen-sh/sdk
 ```
 
 ## Running tests

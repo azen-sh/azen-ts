@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'azen/core/api-promise';
+import { APIPromise } from '@azen-sh/sdk/core/api-promise';
 
 import util from 'node:util';
-import Azen from 'azen';
-import { APIUserAbortError } from 'azen';
+import Azen from '@azen-sh/sdk';
+import { APIUserAbortError } from '@azen-sh/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
