@@ -42,25 +42,25 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:stainless-sdks/azen-typescript.git
+$ npm install git+ssh://git@github.com:azen-sh/azen-ts.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/stainless-sdks/azen-typescript
-$ cd azen-typescript
+$ git clone https://www.github.com/azen-sh/azen-ts
+$ cd azen-ts
 
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link azen
+$ yarn link @azen-sh/sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global azen
+$ pnpm link -—global @azen-sh/sdk
 ```
 
 ## Running tests

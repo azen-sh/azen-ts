@@ -1,12 +1,12 @@
 {
-  "name": "azen",
-  "version": "0.0.1",
+  "name": "@azen-sh/sdk",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the Azen API",
   "author": "Azen <govindvashishat@gmail.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/azen-typescript",
+  "repository": "github:azen-sh/azen-ts",
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.24.0",
   "files": [
