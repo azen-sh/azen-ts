@@ -1,4 +1,4 @@
 configured_endpoints: 5
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/azen%2Fazen-ccfb841d190d1fc238fef6ba2386e7972ff4c22a2117708aac6c871474de7ae8.yml
 openapi_spec_hash: b8070fd330865c41d064c2262e8a77dd
-config_hash: e82f90865207d48cd81c9fd108a3e8e6
+config_hash: 8ec84cab6bf41128f5b0397462404302
