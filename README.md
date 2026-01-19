@@ -137,7 +137,7 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllMemories(params) {
   const allMemories = [];
   // Automatically fetches more pages as needed.
-  for await (const memory of client.memory.list()) {
+  for await (const memory of client.memory.list({ page: 1, per: 10 })) {
     allMemories.push(memory);
   }
   return allMemories;
@@ -147,7 +147,7 @@ async function fetchAllMemories(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.memory.list();
+let page = await client.memory.list({ page: 1, per: 10 });
 for (const memory of page.memories) {
   console.log(memory);
 }
