@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (2026-01-24)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/azen-sh/azen-ts/compare/v0.1.1...v0.1.2)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([7d234bc](https://github.com/azen-sh/azen-ts/commit/7d234bc0dfcdc094159af2061bcff232db5c905e))
+
 ## 0.1.1 (2026-01-19)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/azen-sh/azen-ts/compare/v0.1.0...v0.1.1)
