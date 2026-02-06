@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.3 (2026-02-06)
+
+Full Changelog: [v0.1.2...v0.1.3](https://github.com/azen-sh/azen-ts/compare/v0.1.2...v0.1.3)
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([93461ad](https://github.com/azen-sh/azen-ts/commit/93461ad7affe89580d5c527d5261efa459bd9b90))
+* **client:** avoid removing abort listener too early ([3cc4db9](https://github.com/azen-sh/azen-ts/commit/3cc4db95293bc2df8b4c1da49899f11e2ef974df))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([7f53cfc](https://github.com/azen-sh/azen-ts/commit/7f53cfcdbd95665e786c39801bd63d1bf9f90642))
+* **client:** restructure abort controller binding ([09cd6c5](https://github.com/azen-sh/azen-ts/commit/09cd6c53f56387c93ba6051bbd5cbd3b696c5f61))
+* **internal:** fix pagination internals not accepting option promises ([0741033](https://github.com/azen-sh/azen-ts/commit/0741033f8e0b7f4c2d6935174d0fbcdf58881d9d))
+* **internal:** upgrade pnpm ([9915884](https://github.com/azen-sh/azen-ts/commit/9915884b11c8170feb6dca03d81093f61029e72e))
+
 ## 0.1.2 (2026-01-24)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/azen-sh/azen-ts/compare/v0.1.1...v0.1.2)
