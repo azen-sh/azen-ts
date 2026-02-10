@@ -1,6 +1,6 @@
 {
   "name": "@azen-sh/sdk",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The official TypeScript library for the Azen API",
   "author": "Azen <govindvashishat@gmail.com>",
   "types": "dist/index.d.ts",
