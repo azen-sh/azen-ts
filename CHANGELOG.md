@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.4 (2026-02-18)
+
+Full Changelog: [v0.1.3...v0.1.4](https://github.com/azen-sh/azen-ts/compare/v0.1.3...v0.1.4)
+
+### Chores
+
+* **internal/client:** fix form-urlencoded requests ([0e4bc79](https://github.com/azen-sh/azen-ts/commit/0e4bc7958d7bbe146d5c50d061a81c2bebebef7c))
+* **internal:** avoid type checking errors with ts-reset ([9cf1548](https://github.com/azen-sh/azen-ts/commit/9cf15482ba3998680d385934cce82a5b0c4c0df1))
+
 ## 0.1.3 (2026-02-06)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/azen-sh/azen-ts/compare/v0.1.2...v0.1.3)
