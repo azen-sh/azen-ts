@@ -60,7 +60,7 @@ $ yarn link @azen-sh/sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @azen-sh/sdk
+$ pnpm link --global @azen-sh/sdk
 ```
 
 ## Running tests
