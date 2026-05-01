@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.1.5 (2026-05-01)
+
+Full Changelog: [v0.1.4...v0.1.5](https://github.com/azen-sh/azen-ts/compare/v0.1.4...v0.1.5)
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([7cb2867](https://github.com/azen-sh/azen-ts/commit/7cb2867f64ced440f33ef5f2c520c830b45bd69f))
+* **docs/contributing:** correct pnpm link command ([f2f1d37](https://github.com/azen-sh/azen-ts/commit/f2f1d377be419ba9183e040e766e1668e5e13fd2))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([cf503a5](https://github.com/azen-sh/azen-ts/commit/cf503a58891db12bc6a9ae59e5975e38ec8c5dbf))
+* **ci:** skip uploading artifacts on stainless-internal branches ([56d771b](https://github.com/azen-sh/azen-ts/commit/56d771bb29d1eccc2892c4de3e95d6be94a81565))
+* **internal:** codegen related update ([b9b3193](https://github.com/azen-sh/azen-ts/commit/b9b319325cb56ef01387c0ef0b2b8f4333207cbe))
+* **internal:** codegen related update ([51054f8](https://github.com/azen-sh/azen-ts/commit/51054f879adaf075f6d7e0f9cca8fe31a1c48b54))
+* **internal:** codegen related update ([308b7fc](https://github.com/azen-sh/azen-ts/commit/308b7fc7e96c8cbee62318ccc4eb34dd86714b0a))
+* **internal:** codegen related update ([c7d338e](https://github.com/azen-sh/azen-ts/commit/c7d338e7c1dcf8986f14bb041e2df4f1fe9c885d))
+* **internal:** codegen related update ([c721d87](https://github.com/azen-sh/azen-ts/commit/c721d879c3618d2ebbe05fe2212b7a3c89e93162))
+* **internal:** move stringifyQuery implementation to internal function ([68e8825](https://github.com/azen-sh/azen-ts/commit/68e8825003a9a6e3c3af4f81bb8581859367d157))
+* **internal:** remove mock server code ([22a7aef](https://github.com/azen-sh/azen-ts/commit/22a7aefaaf753553d2707cb41c9d21bd114c9712))
+* **internal:** tweak CI branches ([b67ff77](https://github.com/azen-sh/azen-ts/commit/b67ff77c76762fd7acab24949732c827bea7ba17))
+* **internal:** update dependencies to address dependabot vulnerabilities ([a8e7b58](https://github.com/azen-sh/azen-ts/commit/a8e7b587ca5d1b0549d2ab3436ed18688371e4bd))
+* **internal:** update gitignore ([1b89a17](https://github.com/azen-sh/azen-ts/commit/1b89a17dd511a71847701b00af9cbd50a04f180e))
+* **internal:** upgrade pnpm version ([ab09a02](https://github.com/azen-sh/azen-ts/commit/ab09a0251260bfd702abb44c4a898d6a8fe184d9))
+* update mock server docs ([0863f0a](https://github.com/azen-sh/azen-ts/commit/0863f0a9782b06ebb21bf4d7592407e40567ed36))
+
 ## 0.1.4 (2026-02-18)
 
 Full Changelog: [v0.1.3...v0.1.4](https://github.com/azen-sh/azen-ts/compare/v0.1.3...v0.1.4)
